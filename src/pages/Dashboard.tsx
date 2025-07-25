@@ -9,7 +9,13 @@ import {
   TrendingUp,
   Calendar,
   Clock,
-  AlertTriangle
+  AlertTriangle,
+  Printer,
+  Mail,
+  Eye,
+  FileDown,
+  Zap,
+  Store
 } from "lucide-react"
 
 export default function Dashboard() {
@@ -26,10 +32,16 @@ export default function Dashboard() {
             <Calendar className="w-4 h-4" />
             Hoje
           </Button>
-          <Button className="gap-2 bg-gradient-primary">
-            <ShoppingCart className="w-4 h-4" />
-            Nova Venda
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" className="gap-2">
+              <FileDown className="w-4 h-4" />
+              Exportar Caixa
+            </Button>
+            <Button className="gap-2 bg-gradient-primary">
+              <Zap className="w-4 h-4" />
+              Venda Rápida
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -83,14 +95,22 @@ export default function Dashboard() {
                 { id: "#001232", cliente: "Pedro Costa", valor: "R$ 95,20", tempo: "18 min atrás", status: "Concluída" },
                 { id: "#001231", cliente: "Ana Oliveira", valor: "R$ 320,15", tempo: "25 min atrás", status: "Concluída" },
               ].map((venda) => (
-                <div key={venda.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-md">
-                  <div className="space-y-1">
+                <div key={venda.id} className="flex items-center justify-between p-3 bg-muted/30">
+                  <div className="flex-1 space-y-1">
                     <p className="font-medium">{venda.cliente}</p>
                     <p className="text-sm text-muted-foreground">{venda.id} • {venda.tempo}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right mr-3">
                     <p className="font-semibold text-success">{venda.valor}</p>
                     <p className="text-sm text-muted-foreground">{venda.status}</p>
+                  </div>
+                  <div className="flex gap-1">
+                    <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+                      <Eye className="w-3 h-3" />
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+                      <Printer className="w-3 h-3" />
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -107,6 +127,10 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent className="space-y-3">
               <Button className="w-full justify-start gap-3 bg-gradient-primary">
+                <Zap className="w-4 h-4" />
+                Venda Rápida
+              </Button>
+              <Button variant="outline" className="w-full justify-start gap-3">
                 <ShoppingCart className="w-4 h-4" />
                 Nova Venda
               </Button>
@@ -121,6 +145,10 @@ export default function Dashboard() {
               <Button variant="outline" className="w-full justify-start gap-3">
                 <DollarSign className="w-4 h-4" />
                 Abrir Caixa
+              </Button>
+              <Button variant="outline" className="w-full justify-start gap-3">
+                <Mail className="w-4 h-4" />
+                Enviar Relatório
               </Button>
             </CardContent>
           </Card>

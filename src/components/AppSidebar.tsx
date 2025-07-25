@@ -11,7 +11,8 @@ import {
   BookOpen,
   UserCheck,
   Tags,
-  Receipt
+  Receipt,
+  Zap
 } from "lucide-react"
 
 import {
@@ -37,6 +38,12 @@ const navigationItems = [
     title: "Vendas", 
     url: "/vendas", 
     icon: ShoppingCart,
+    group: "vendas"
+  },
+  { 
+    title: "Venda Rápida", 
+    url: "/venda-rapida", 
+    icon: Zap,
     group: "vendas"
   },
   { 

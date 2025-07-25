@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { DollarSign, Clock, TrendingUp, Calculator } from "lucide-react"
+import { DollarSign, Clock, TrendingUp, Calculator, Mail, FileDown, Printer, Eye } from "lucide-react"
 
 export default function Caixa() {
   return (
@@ -12,6 +12,14 @@ export default function Caixa() {
           <p className="text-muted-foreground">Controle de abertura e fechamento</p>
         </div>
         <div className="flex gap-3">
+          <Button variant="outline" className="gap-2">
+            <Mail className="w-4 h-4" />
+            Enviar por Email
+          </Button>
+          <Button variant="outline" className="gap-2">
+            <FileDown className="w-4 h-4" />
+            Exportar Relatório
+          </Button>
           <Button variant="outline" className="gap-2">
             <Calculator className="w-4 h-4" />
             Sangria
@@ -131,6 +139,7 @@ export default function Caixa() {
                   <th className="text-left p-2">Vendas</th>
                   <th className="text-left p-2">Total Final</th>
                   <th className="text-left p-2">Diferença</th>
+                  <th className="text-left p-2">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -142,6 +151,19 @@ export default function Caixa() {
                   <td className="p-2">R$ 11.580,00</td>
                   <td className="p-2">R$ 11.780,00</td>
                   <td className="p-2 text-success">R$ 0,00</td>
+                  <td className="p-2">
+                    <div className="flex gap-1">
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Eye className="w-3 h-3" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Printer className="w-3 h-3" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Mail className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
                 <tr className="border-b hover:bg-muted/30">
                   <td className="p-2">22/07/2024</td>
@@ -151,6 +173,19 @@ export default function Caixa() {
                   <td className="p-2">R$ 9.650,00</td>
                   <td className="p-2">R$ 9.850,00</td>
                   <td className="p-2 text-success">R$ 0,00</td>
+                  <td className="p-2">
+                    <div className="flex gap-1">
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Eye className="w-3 h-3" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Printer className="w-3 h-3" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                        <Mail className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

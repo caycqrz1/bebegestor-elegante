@@ -1,16 +1,76 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Archive, Plus, Search, TrendingDown, AlertTriangle, Package } from "lucide-react"
+import { Archive, Plus, Search, TrendingDown, AlertTriangle, Package, Edit, Eye, Printer } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function Estoque() {
   const produtos = [
-    { id: 1, nome: "Cerveja Brahma 350ml", categoria: "Cervejas", estoque: 120, minimo: 50, maximo: 200, status: "normal" },
-    { id: 2, nome: "Refrigerante Coca-Cola 2L", categoria: "Refrigerantes", estoque: 45, minimo: 30, maximo: 100, status: "normal" },
-    { id: 3, nome: "Água Mineral Crystal 500ml", categoria: "Águas", estoque: 200, minimo: 100, maximo: 300, status: "normal" },
-    { id: 4, nome: "Energético Red Bull 250ml", categoria: "Energéticos", estoque: 15, minimo: 20, maximo: 80, status: "baixo" },
-    { id: 5, nome: "Cerveja Skol 350ml", categoria: "Cervejas", estoque: 8, minimo: 30, maximo: 150, status: "critico" },
+    { 
+      id: 1, 
+      nome: "Cerveja Brahma 350ml", 
+      categoria: "Cervejas", 
+      estoque: 120, 
+      minimo: 50, 
+      maximo: 200, 
+      status: "normal",
+      fornecedor: "Ambev Distribuidora",
+      valorCompra: 2.80,
+      valorVenda: 4.50,
+      ultimaEntrada: "20/07/2024"
+    },
+    { 
+      id: 2, 
+      nome: "Refrigerante Coca-Cola 2L", 
+      categoria: "Refrigerantes", 
+      estoque: 45, 
+      minimo: 30, 
+      maximo: 100, 
+      status: "normal",
+      fornecedor: "Coca-Cola FEMSA",
+      valorCompra: 4.20,
+      valorVenda: 7.50,
+      ultimaEntrada: "18/07/2024"
+    },
+    { 
+      id: 3, 
+      nome: "Água Mineral Crystal 500ml", 
+      categoria: "Águas", 
+      estoque: 200, 
+      minimo: 100, 
+      maximo: 300, 
+      status: "normal",
+      fornecedor: "Crystal Distribuidora",
+      valorCompra: 1.20,
+      valorVenda: 2.50,
+      ultimaEntrada: "22/07/2024"
+    },
+    { 
+      id: 4, 
+      nome: "Energético Red Bull 250ml", 
+      categoria: "Energéticos", 
+      estoque: 15, 
+      minimo: 20, 
+      maximo: 80, 
+      status: "baixo",
+      fornecedor: "Red Bull Brasil",
+      valorCompra: 7.80,
+      valorVenda: 12.90,
+      ultimaEntrada: "15/07/2024"
+    },
+    { 
+      id: 5, 
+      nome: "Cerveja Skol 350ml", 
+      categoria: "Cervejas", 
+      estoque: 8, 
+      minimo: 30, 
+      maximo: 150, 
+      status: "critico",
+      fornecedor: "Ambev Distribuidora",
+      valorCompra: 2.60,
+      valorVenda: 4.20,
+      ultimaEntrada: "10/07/2024"
+    },
   ]
 
   const getStatusBadge = (status: string, estoque: number, minimo: number) => {
@@ -97,39 +157,71 @@ export default function Estoque() {
               <thead>
                 <tr className="border-b">
                   <th className="text-left p-2">Produto</th>
-                  <th className="text-left p-2">Categoria</th>
-                  <th className="text-left p-2">Estoque Atual</th>
-                  <th className="text-left p-2">Mínimo</th>
-                  <th className="text-left p-2">Máximo</th>
+                  <th className="text-left p-2">Fornecedor</th>
+                  <th className="text-left p-2">Estoque</th>
+                  <th className="text-left p-2">Custo</th>
+                  <th className="text-left p-2">Venda</th>
+                  <th className="text-left p-2">Margem</th>
                   <th className="text-left p-2">Status</th>
                   <th className="text-left p-2">Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {produtos.map((produto) => (
-                  <tr key={produto.id} className="border-b hover:bg-muted/30">
-                    <td className="p-2 font-medium">{produto.nome}</td>
-                    <td className="p-2 text-muted-foreground">{produto.categoria}</td>
-                    <td className="p-2">
-                      <span className={`font-semibold ${
-                        produto.estoque < produto.minimo * 0.5 ? 'text-destructive' :
-                        produto.estoque < produto.minimo ? 'text-warning' : 'text-foreground'
-                      }`}>
-                        {produto.estoque} un
-                      </span>
-                    </td>
-                    <td className="p-2 text-muted-foreground">{produto.minimo} un</td>
-                    <td className="p-2 text-muted-foreground">{produto.maximo} un</td>
-                    <td className="p-2">
-                      {getStatusBadge(produto.status, produto.estoque, produto.minimo)}
-                    </td>
-                    <td className="p-2">
-                      <Button size="sm" variant="outline">
-                        Ajustar
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                {produtos.map((produto) => {
+                  const margem = ((produto.valorVenda - produto.valorCompra) / produto.valorCompra * 100).toFixed(1)
+                  return (
+                    <tr key={produto.id} className="border-b hover:bg-muted/30">
+                      <td className="p-2">
+                        <div>
+                          <p className="font-medium">{produto.nome}</p>
+                          <p className="text-xs text-muted-foreground">{produto.categoria}</p>
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <div>
+                          <p className="text-sm font-medium">{produto.fornecedor}</p>
+                          <p className="text-xs text-muted-foreground">Última: {produto.ultimaEntrada}</p>
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <span className={`font-semibold ${
+                          produto.estoque < produto.minimo * 0.5 ? 'text-destructive' :
+                          produto.estoque < produto.minimo ? 'text-warning' : 'text-foreground'
+                        }`}>
+                          {produto.estoque} un
+                        </span>
+                        <p className="text-xs text-muted-foreground">Min: {produto.minimo}</p>
+                      </td>
+                      <td className="p-2">
+                        <span className="text-sm font-medium">R$ {produto.valorCompra.toFixed(2)}</span>
+                      </td>
+                      <td className="p-2">
+                        <span className="text-sm font-medium">R$ {produto.valorVenda.toFixed(2)}</span>
+                      </td>
+                      <td className="p-2">
+                        <span className={`text-sm font-medium ${
+                          Number(margem) > 50 ? 'text-success' : 
+                          Number(margem) > 30 ? 'text-warning' : 'text-destructive'
+                        }`}>
+                          {margem}%
+                        </span>
+                      </td>
+                      <td className="p-2">
+                        {getStatusBadge(produto.status, produto.estoque, produto.minimo)}
+                      </td>
+                      <td className="p-2">
+                        <div className="flex gap-1">
+                          <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                            <Edit className="w-3 h-3" />
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-8 w-8 p-0">
+                            <Eye className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
